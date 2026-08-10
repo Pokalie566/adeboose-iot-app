@@ -1,0 +1,23 @@
+# no namespace here on purpose: the argo cd Application decides where this lands
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: playground
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: playground
+  template:
+    metadata:
+      labels:
+        app: playground
+    spec:
+      containers:
+        - name: app
+          image: pokalie566/iot-app:v1
+          env:
+            - name: APP_NAME
+              value: playground
+          ports:
+            - containerPort: 80
